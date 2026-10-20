@@ -18,5 +18,4 @@ function ProjectCard({ title, description, image, tags, liveUrl, githubUrl }) {
     </div>
   )
 }
-
 export default ProjectCard
