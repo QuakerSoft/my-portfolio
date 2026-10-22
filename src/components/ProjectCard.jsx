@@ -1,6 +1,6 @@
 function ProjectCard({ title, description, image, tags, liveUrl, githubUrl }) {
   return (
-    <div className="project-card">
+    <div className="project-card border rounded-lg p-4 shadow-md transition-transform duration-500 ease-out hover:scale-105">
       {image && <img src={image} alt={title} />}
       <h3>{title}</h3>
       <p>{description}</p>
