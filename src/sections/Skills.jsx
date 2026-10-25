@@ -29,9 +29,9 @@ const skills = [
 
 function Skills() {
   return (
-    <section id="skills" className="skills-section p-8 bg-gray-900 text-white">
+    <section id="skills" className="skills-section p-8 bg-gray-900 text-white ">
       <h2 className="text-2xl font-bold mb-4 text-center">Skills</h2>
-      <div className="skills-list grid grid-cols-3 gap-4">
+      <div className="skills-list grid grid-cols-3 gap-6 max-w-2xl mx-auto">
         {skills.map((skill) => (
           <SkillBadge 
           key={skill.icon} 
