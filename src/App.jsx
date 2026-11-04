@@ -5,10 +5,14 @@ import Projects from './sections/Projects'
 import Skills from './sections/Skills'
 import Contact from './sections/Contact'
 import Footer from './components/Footer'
+// import StarField from './components/StarField'
+import DotGrid from './components/DotGrid'
 
 function App() {
   return (
     <>
+      {/* <StarField /> */}
+      <DotGrid />
       <Navbar />
       <Hero />
       <About />

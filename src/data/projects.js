@@ -1,11 +1,13 @@
+import finditImage from '../assets/images/finditport.png'
+
 export const projects = [
   {
     title: 'FindIt',
     description: 'Lost and Found web application for CSUN students to post and find lost items on campus.',
-    image: 'src/assets/images/finditport.png',
+    image: finditImage,
     tags: ['React', 'Firebase', 'Tailwind CSS'],
     liveUrl: 'https://find-it-csun380.vercel.app',
-    githubUrl: 'https://github.com/QuakerSoft/FindIt ',
+    githubUrl: 'https://github.com/QuakerSoft/FindIt',
   },
   {
     title: 'Star Wars Holocron',
