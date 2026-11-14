@@ -4,6 +4,14 @@
 /* keeps section headings from landing under the sticky navbar */
 html {
   scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
+}
+
+/* respect the OS "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
