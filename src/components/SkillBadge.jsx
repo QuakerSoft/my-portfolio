@@ -1,17 +1,12 @@
-function SkillBadge({ name, icon }) {
+function SkillBadge({ name, icon, invert = false }) {
   return (
-    <div className="skill-badge flex flex-col items-center justify-center gap-4 bg-black text-white px-4 py-6 rounded-3xl text-center font-bold border border-white/10">
-      <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
-        {name}
-      </span>
-
+    <div className="skill-badge inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/80 px-4 py-2 text-sm text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-500">
       <img
         src={icon}
-        alt={`${name} logo`}
-        className={`w-12 h-12 object-contain ${
-      name === "Express.js" ? "brightness-0 invert" : ""
-    }`}
+        alt=""
+        className={`h-5 w-5 object-contain ${invert ? 'brightness-0 invert' : ''}`}
       />
+      {name}
     </div>
   )
 }

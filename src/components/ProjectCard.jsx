@@ -8,7 +8,7 @@ export default function ProjectCard({
   githubUrl,
 }) {
   return (
-    <article className="group overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/10">
+    <article className="group overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10">
 
       {/* Project image */}
       {image && (
@@ -37,7 +37,7 @@ export default function ProjectCard({
             {tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs text-cyan-300"
+                className="rounded-full border border-slate-700 bg-slate-800 px-3 py-1 text-xs text-blue-400"
               >
                 {tag}
               </li>
@@ -53,7 +53,7 @@ export default function ProjectCard({
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg bg-cyan-500 px-3 py-2.5 text-sm font-medium text-slate-950 transition-colors hover:bg-cyan-400"
+              className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-500"
             >
               <span>View Live</span>
               <span aria-hidden="true">↗</span>
@@ -69,7 +69,7 @@ export default function ProjectCard({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-cyan-400 hover:text-cyan-300"
+              className="flex items-center justify-center gap-2 rounded-lg border border-slate-700 px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:border-blue-500 hover:text-blue-400"
             >
               <span>View Code</span>
               <span aria-hidden="true">↗</span>

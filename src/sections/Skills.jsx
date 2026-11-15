@@ -1,43 +1,45 @@
 import SkillBadge from '../components/SkillBadge'
 
-const skills = [
+const skillGroups = [
   {
-    name: 'React.JS',
-    icon: '/icons/react-original.svg'
+    category: 'Backend',
+    skills: [
+      { name: 'Java', icon: '/icons/java-plain.svg' },
+      { name: 'Spring Boot', icon: '/icons/spring-original.svg' },
+      { name: 'Express', icon: '/icons/express-original.svg', invert: true },
+    ],
   },
   {
-    name: 'Java',
-    icon: '/icons/java-plain.svg'
+    category: 'Database',
+    skills: [
+      { name: 'PostgreSQL', icon: '/icons/postgresql-plain.svg' },
+    ],
   },
   {
-    name: 'TypeScript',
-    icon: '/icons/typescript-original.svg'
+    category: 'Frontend',
+    skills: [
+      { name: 'React', icon: '/icons/react-original.svg' },
+      { name: 'TypeScript', icon: '/icons/typescript-original.svg' },
+    ],
   },
-  {
-    name: 'Spring Boot',
-    icon: '/icons/spring-original.svg'
-  },
-  {
-    name: 'PostgreSQL',
-    icon: '/icons/postgresql-plain.svg'
-  },
-  {
-    name: 'Express.js',
-    icon: '/icons/express-original.svg'
-  }
 ]
 
 function Skills() {
   return (
     <section id="skills" className="skills-section p-8 pb-24 text-white">
-      <h2 className="text-2xl font-bold mb-4 text-center">Skills</h2>
-      <div className="skills-list grid grid-cols-3 gap-6 max-w-2xl mx-auto">
-        {skills.map((skill) => (
-          <SkillBadge 
-          key={skill.icon} 
-          name={skill.name} 
-          icon={skill.icon}
-          />
+      <h2 className="text-2xl font-bold mb-8 text-center">Skills</h2>
+      <div className="skills-list mx-auto max-w-2xl divide-y divide-white/10">
+        {skillGroups.map((group) => (
+          <div key={group.category} className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6">
+            <h3 className="w-24 shrink-0 font-mono text-sm text-blue-500">{group.category}</h3>
+            <ul className="flex flex-wrap gap-3">
+              {group.skills.map((skill) => (
+                <li key={skill.name}>
+                  <SkillBadge name={skill.name} icon={skill.icon} invert={skill.invert} />
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
     </section>
