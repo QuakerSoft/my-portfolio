@@ -27,8 +27,8 @@ const skillGroups = [
 function Skills() {
   return (
     <section id="skills" className="skills-section p-8 pb-24 text-white">
-      <h2 className="text-2xl font-bold mb-8 text-center">Skills</h2>
-      <div className="skills-list mx-auto max-w-2xl divide-y divide-white/10">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 md:mb-12 text-center">Skills</h2>
+      <div className="skills-list mx-auto max-w-3xl divide-y divide-white/10">
         {skillGroups.map((group) => (
           <div key={group.category} className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6">
             <h3 className="w-24 shrink-0 font-mono text-sm text-blue-500">{group.category}</h3>
