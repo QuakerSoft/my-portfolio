@@ -1,3 +1,14 @@
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from 'motion/react'
+
+// how far the card leans toward the cursor, in degrees
+const MAX_TILT = 8
 
 export default function ProjectCard({
   title,
@@ -7,8 +18,48 @@ export default function ProjectCard({
   liveUrl,
   githubUrl,
 }) {
+  const reduceMotion = useReducedMotion()
+
+  // cursor position inside the card, from 0 to 1 on each axis
+  const px = useMotionValue(0.5)
+  const py = useMotionValue(0.5)
+
+  // springs make the tilt ease in and out instead of snapping
+  const spring = { stiffness: 250, damping: 20 }
+  const rotateX = useSpring(useTransform(py, [0, 1], [MAX_TILT, -MAX_TILT]), spring)
+  const rotateY = useSpring(useTransform(px, [0, 1], [-MAX_TILT, MAX_TILT]), spring)
+
+  // soft blue glow that follows the cursor
+  const spotX = useTransform(px, (v) => `${v * 100}%`)
+  const spotY = useTransform(py, (v) => `${v * 100}%`)
+  const spotlight = useMotionTemplate`radial-gradient(350px circle at ${spotX} ${spotY}, rgba(59,130,246,0.15), transparent 70%)`
+
+  function handleMove(e) {
+    // skip on touch screens and for people who turned on "reduce motion"
+    if (reduceMotion || e.pointerType !== 'mouse') return
+    const rect = e.currentTarget.getBoundingClientRect()
+    px.set((e.clientX - rect.left) / rect.width)
+    py.set((e.clientY - rect.top) / rect.height)
+  }
+
+  function handleLeave() {
+    px.set(0.5)
+    py.set(0.5)
+  }
+
   return (
-    <article className="group overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-all duration-300 hover:-translate-y-1 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10">
+    <motion.article
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      className="group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-[border-color,box-shadow] duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10"
+    >
+      {/* Spotlight overlay */}
+      <motion.div
+        aria-hidden="true"
+        style={{ background: spotlight }}
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
 
       {/* Project image */}
       {image && (
@@ -77,6 +128,6 @@ export default function ProjectCard({
           )}
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 }
