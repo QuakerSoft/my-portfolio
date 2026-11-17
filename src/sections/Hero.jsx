@@ -86,26 +86,35 @@ function Hero() {
       </motion.p>
 
       <div className="flex flex-wrap justify-center gap-4">
-      <motion.a
-        href="#contact"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 md:text-lg rounded"
-        variants={fadeUp}
-        custom={1}
-        initial={reduceMotion ? false : 'hidden'}
-        animate={done ? 'show' : 'hidden'}
-      >
-        Contact Me
-      </motion.a>
-      <motion.a
-        href="#projects"
-        className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 md:py-3 md:px-6 md:text-lg rounded"
-        variants={fadeUp}
-        custom={2}
-        initial={reduceMotion ? false : 'hidden'}
-        animate={done ? 'show' : 'hidden'}
-      >
-        View Projects
-      </motion.a>
+        {/* main action: solid blue pill with the same glow as the navbar */}
+        <motion.a
+          href="#contact"
+          className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 font-medium text-white shadow-[0_0_24px_rgba(59,130,246,0.35)] transition-[background-color,box-shadow] duration-300 hover:bg-blue-500 hover:shadow-[0_0_36px_rgba(59,130,246,0.6)] md:px-7 md:text-lg"
+          variants={fadeUp}
+          custom={1}
+          initial={reduceMotion ? false : 'hidden'}
+          animate={done ? 'show' : 'hidden'}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          Contact Me
+          <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </motion.a>
+
+        {/* second action: quiet outlined pill */}
+        <motion.a
+          href="#projects"
+          className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/60 px-6 py-3 font-medium text-slate-200 transition-colors duration-300 hover:border-blue-500 hover:text-white md:px-7 md:text-lg"
+          variants={fadeUp}
+          custom={2}
+          initial={reduceMotion ? false : 'hidden'}
+          animate={done ? 'show' : 'hidden'}
+          whileHover={{ y: -2 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          View Projects
+          <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+        </motion.a>
       </div>
     </section>
   )
