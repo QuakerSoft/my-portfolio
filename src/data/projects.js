@@ -8,6 +8,7 @@ export const projects = [
     tags: ['React', 'Firebase', 'Tailwind CSS'],
     liveUrl: 'https://find-it-csun380.vercel.app',
     githubUrl: 'https://github.com/QuakerSoft/FindIt',
+    featured: true,
   },
   {
     title: 'Star Wars Holocron',

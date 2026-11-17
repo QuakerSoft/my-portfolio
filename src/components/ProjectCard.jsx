@@ -17,6 +17,7 @@ export default function ProjectCard({
   tags,
   liveUrl,
   githubUrl,
+  featured = false,
 }) {
   const reduceMotion = useReducedMotion()
 
@@ -26,8 +27,10 @@ export default function ProjectCard({
 
   // springs make the tilt ease in and out instead of snapping
   const spring = { stiffness: 250, damping: 20 }
-  const rotateX = useSpring(useTransform(py, [0, 1], [MAX_TILT, -MAX_TILT]), spring)
-  const rotateY = useSpring(useTransform(px, [0, 1], [-MAX_TILT, MAX_TILT]), spring)
+  // big cards tilt half as much so they do not swing too far
+  const tilt = featured ? MAX_TILT / 2 : MAX_TILT
+  const rotateX = useSpring(useTransform(py, [0, 1], [tilt, -tilt]), spring)
+  const rotateY = useSpring(useTransform(px, [0, 1], [-tilt, tilt]), spring)
 
   // soft blue glow that follows the cursor
   const spotX = useTransform(px, (v) => `${v * 100}%`)
@@ -52,7 +55,7 @@ export default function ProjectCard({
       onPointerMove={handleMove}
       onPointerLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 900 }}
-      className="group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-[border-color,box-shadow] duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10"
+      className={`group relative flex h-full flex-col overflow-hidden rounded-xl border border-slate-700 bg-slate-950/80 transition-[border-color,box-shadow] duration-300 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-500/10 ${featured ? 'lg:flex-row' : ''}`}
     >
       {/* Spotlight overlay */}
       <motion.div
@@ -63,19 +66,34 @@ export default function ProjectCard({
 
       {/* Project image */}
       {image && (
-        <div className="overflow-hidden">
+        <div
+          className={`relative shrink-0 overflow-hidden ${
+            featured ? 'h-64 sm:h-72 lg:h-auto lg:min-h-80 lg:w-3/5' : 'h-48'
+          }`}
+        >
+          {/* show only the top of the screenshot, so tall pages don't take over */}
           <img
             src={image}
             alt={`${title} preview`}
-            className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+          {/* dark tint so bright screenshots blend into the dark site; lifts on hover */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-b from-slate-950/40 to-slate-950/75 transition-opacity duration-500 group-hover:opacity-0"
           />
         </div>
       )}
 
       {/* Project information */}
-      <div className="p-5">
-        <h3 className="mb-2 text-xl font-semibold text-white">
+      <div className={`flex flex-1 flex-col p-5 ${featured ? 'lg:justify-center lg:p-8' : ''}`}>
+        <h3 className={`mb-2 flex items-center gap-3 font-semibold text-white ${featured ? 'text-2xl' : 'text-xl'}`}>
           {title}
+          {featured && (
+            <span className="rounded-full border border-blue-500/40 px-2.5 py-0.5 font-mono text-xs font-normal text-blue-400">
+              featured
+            </span>
+          )}
         </h3>
 
         <p className="mb-4 text-sm leading-relaxed text-slate-400">
@@ -97,7 +115,7 @@ export default function ProjectCard({
         )}
 
         {/* Separate action buttons */}
-        <div className="grid grid-cols-2 gap-3 border-t border-slate-800 pt-4">
+        <div className={`grid grid-cols-2 gap-3 border-t border-slate-800 pt-4 ${featured ? 'mt-auto lg:mt-0' : 'mt-auto'}`}>
 
           {liveUrl ? (
             <a
