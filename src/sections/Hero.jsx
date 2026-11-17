@@ -85,6 +85,7 @@ function Hero() {
         Computer Science Student
       </motion.p>
 
+      <div className="flex flex-wrap justify-center gap-4">
       <motion.a
         href="#contact"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 md:py-3 md:px-6 md:text-lg rounded"
@@ -97,7 +98,7 @@ function Hero() {
       </motion.a>
       <motion.a
         href="#projects"
-        className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 md:py-3 md:px-6 md:text-lg rounded mt-4"
+        className="bg-gray-700 hover:bg-gray-900 text-white font-bold py-2 px-4 md:py-3 md:px-6 md:text-lg rounded"
         variants={fadeUp}
         custom={2}
         initial={reduceMotion ? false : 'hidden'}
@@ -105,6 +106,7 @@ function Hero() {
       >
         View Projects
       </motion.a>
+      </div>
     </section>
   )
 }
