@@ -49,14 +49,17 @@ function Contact() {
 
   return (
     <section id="contact" className="contact-section p-8 pb-24 text-white">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">Contact</h2>
-      <p className="mb-8 md:mb-12 text-center text-slate-400 md:text-lg">
+      <div className="mx-auto max-w-6xl">
+      {/* Section heading */}
+      <p className="mb-2 font-mono text-sm text-blue-500 md:text-base">03 / contact</p>
+      <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">Get in touch</h2>
+      <p className="mb-8 text-slate-400 md:mb-12 md:text-lg">
         Open to internships and junior developer roles.
       </p>
 
       <div
         ref={terminalRef}
-        className="mx-auto max-w-xl xl:max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-slate-950/80 shadow-[0_0_24px_rgba(59,130,246,0.12)]"
+        className="max-w-xl xl:max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-slate-950/80 shadow-[0_0_24px_rgba(59,130,246,0.12)]"
       >
         {/* Window bar */}
         <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
@@ -102,6 +105,7 @@ function Contact() {
             </motion.ul>
           )}
         </div>
+      </div>
       </div>
     </section>
   )

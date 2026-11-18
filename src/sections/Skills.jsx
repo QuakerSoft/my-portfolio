@@ -27,8 +27,11 @@ const skillGroups = [
 function Skills() {
   return (
     <section id="skills" className="skills-section p-8 pb-24 text-white">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 md:mb-12 text-center">Skills</h2>
-      <div className="skills-list mx-auto max-w-3xl divide-y divide-white/10">
+      <div className="mx-auto max-w-6xl">
+      {/* Section heading */}
+      <p className="mb-2 font-mono text-sm text-blue-500 md:text-base">02 / skills</p>
+      <h2 className="mb-8 text-2xl font-bold md:mb-12 md:text-3xl lg:text-4xl">What I work with</h2>
+      <div className="skills-list max-w-3xl divide-y divide-white/10">
         {skillGroups.map((group) => (
           <div key={group.category} className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:gap-6">
             <h3 className="w-24 shrink-0 font-mono text-sm text-blue-500">{group.category}</h3>
@@ -41,6 +44,7 @@ function Skills() {
             </ul>
           </div>
         ))}
+      </div>
       </div>
     </section>
   )
