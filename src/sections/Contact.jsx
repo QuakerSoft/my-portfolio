@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, useReducedMotion } from 'motion/react'
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
+
+const EMAIL = 'you@example.com' // TODO: your real email
 
 // TODO: replace these placeholders with links
 const contactLinks = [
-  { label: 'email', text: 'you@example.com', href: 'mailto:you@example.com' },
+  { label: 'email', text: EMAIL, href: `mailto:${EMAIL}`, copy: EMAIL },
   { label: 'github', text: 'github.com/QuakerSoft', href: 'https://github.com/QuakerSoft' },
   { label: 'linkedin', text: 'linkedin.com/in/yourname', href: 'https://www.linkedin.com/in/yourname' },
   { label: 'resume', text: 'resume.pdf', href: '/resume.pdf' },
@@ -27,6 +29,22 @@ function Contact() {
   const inView = useInView(terminalRef, { once: true, amount: 0.5 })
   const reduceMotion = useReducedMotion()
   const [typed, setTyped] = useState(0)
+  const [copied, setCopied] = useState(false)
+  const copyTimer = useRef(null)
+
+  // copy the email to the clipboard and show "copied" for 2 seconds
+  async function handleCopy(text) {
+    try {
+      await navigator.clipboard.writeText(text)
+    } catch {
+      return // clipboard blocked; the mailto link still works
+    }
+    setCopied(true)
+    clearTimeout(copyTimer.current)
+    copyTimer.current = setTimeout(() => setCopied(false), 2000)
+  }
+
+  useEffect(() => () => clearTimeout(copyTimer.current), [])
 
   // type the command one letter at a time once the terminal scrolls into view
   useEffect(() => {
@@ -87,7 +105,7 @@ function Contact() {
           {doneTyping && (
             <motion.ul variants={outputList} initial="hidden" animate="show">
               {contactLinks.map((link) => (
-                <motion.li key={link.label} variants={outputLine} className="flex gap-4">
+                <motion.li key={link.label} variants={outputLine} className="flex items-center gap-4">
                   <span className="w-20 shrink-0 text-slate-500 sm:w-24">{link.label}</span>
                   <a
                     href={link.href}
@@ -97,6 +115,56 @@ function Contact() {
                   >
                     {link.text}
                   </a>
+
+                  {/* copy button, only on lines that have something to copy */}
+                  {link.copy && (
+                    <span className="flex shrink-0 items-center gap-2">
+                      <motion.button
+                        type="button"
+                        onClick={() => handleCopy(link.copy)}
+                        aria-label={copied ? 'Email copied' : 'Copy email'}
+                        title="Copy email"
+                        whileTap={{ scale: 0.85 }}
+                        className={`rounded-md p-1 transition-colors duration-300 ${
+                          copied ? 'text-green-500' : 'text-slate-500 hover:text-blue-400'
+                        }`}
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          className="h-4 w-4 sm:h-5 sm:w-5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          aria-hidden="true"
+                        >
+                          {copied ? (
+                            <path d="M5 12l5 5L20 7" />
+                          ) : (
+                            <>
+                              <rect x="9" y="9" width="12" height="12" rx="2" />
+                              <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+                            </>
+                          )}
+                        </svg>
+                      </motion.button>
+                      <AnimatePresence>
+                        {copied && (
+                          <motion.span
+                            role="status"
+                            initial={{ opacity: 0, x: -6 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-xs text-green-500 sm:text-sm"
+                          >
+                            copied
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
+                    </span>
+                  )}
                 </motion.li>
               ))}
               <motion.li variants={outputLine} className="mt-2 text-slate-400">
