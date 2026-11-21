@@ -43,7 +43,7 @@ const socials = [
   },
   {
     label: 'Email',
-    href: 'mailto:you@example.com',
+    href: 'mailto:comodevin6@gmail.com',
     svgProps: { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' },
     icon: (
       <>

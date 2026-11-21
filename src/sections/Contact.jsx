@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
 
-const EMAIL = 'you@example.com' // TODO: your real email
+const EMAIL = 'comodevin6@gmail.com' // TODO: your real email
 
 // TODO: replace these placeholders with links
 const contactLinks = [
