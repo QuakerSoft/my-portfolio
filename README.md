@@ -2,7 +2,7 @@
 
 My personal portfolio site: nothing fancy, just a simple, modern, dark design showing my projects and skills.
 
-[Live Site]devincomo.vercel.app
+[Live Site](devincomo.vercel.app)
 
 
 
