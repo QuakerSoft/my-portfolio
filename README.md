@@ -2,7 +2,8 @@
 
 My personal portfolio site: nothing fancy, just a simple, modern, dark design showing my projects and skills.
 
-**Live site:** devincomo.vercel.app
+[Live Site]devincomo.vercel.app
+
 
 
 ![Portfolio screenshot](<img width="2543" height="1279" alt="image" src="https://github.com/user-attachments/assets/82ce74e2-c878-4044-99b2-0979c87d7996" />
